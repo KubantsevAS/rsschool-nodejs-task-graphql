@@ -17,18 +17,18 @@ export const changeMutations = {
                     fields: {
                         title: { type: GraphQLString },
                         content: { type: GraphQLString },
-                    }
-                }))
-            }
+                    },
+                })),
+            },
         },
         resolve: async (_, { id, dto }: { id: string, dto: { title?: string; content?: string } }, { prisma }: { prisma: PrismaClient }) => {
             return prisma.post.update({
                 where: {
                     id
                 },
-                data: dto
+                data: dto,
             });
-        }
+        },
     },
     changeUser: {
         type: new GraphQLNonNull(userType),
@@ -39,19 +39,19 @@ export const changeMutations = {
                     name: 'ChangeUserInput',
                     fields: {
                         name: { type: GraphQLString },
-                        balance: { type: GraphQLFloat }
-                    }
-                }))
-            }
+                        balance: { type: GraphQLFloat },
+                    },
+                })),
+            },
         },
         resolve: async (_, { id, dto }: { id: string, dto: { name?: string; balance?: number } }, { prisma }: { prisma: PrismaClient }) => {
             return prisma.user.update({
                 where: {
                     id
                 },
-                data: dto
+                data: dto,
             });
-        }
+        },
     },
     changeProfile: {
         type: new GraphQLNonNull(profileType),
@@ -64,17 +64,17 @@ export const changeMutations = {
                         isMale: { type: GraphQLBoolean },
                         yearOfBirth: { type: GraphQLInt },
                         memberTypeId: { type: memberTypeId },
-                    }
-                }))
-            }
+                    },
+                })),
+            },
         },
         resolve: async (_, { id, dto }: { id: string, dto: { isMale?: boolean; yearOfBirth?: number; memberTypeId?: string } }, { prisma }: { prisma: PrismaClient }) => {
             return prisma.profile.update({
                 where: {
-                    id
+                    id,
                 },
-                data: dto
+                data: dto,
             });
-        }
-    }
+        },
+    },
 };

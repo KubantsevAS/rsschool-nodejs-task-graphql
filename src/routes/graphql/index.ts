@@ -2,25 +2,14 @@ import { FastifyPluginAsyncTypebox } from '@fastify/type-provider-typebox';
 import { createGqlResponseSchema, gqlResponseSchema } from './schemas.js';
 import {
     graphql,
-    GraphQLFieldMap,
-    GraphQLInterfaceType,
     GraphQLObjectType,
     GraphQLSchema,
-    GraphQLString,
-    GraphQLNonNull,
-    GraphQLInputObjectType,
-    GraphQLFloat,
-    GraphQLBoolean,
-    GraphQLInt
 } from 'graphql';
 import { fieldQueries } from './fieldQueries.js';
-import { postType } from './types/postType.js';
-import { userType } from './types/userType.js';
-import { profileType } from './types/profileType.js';
-import { memberTypeId } from './types/memberType.js';
-import { UUIDType } from './types/uuid.js';
-import { PrismaClient } from '@prisma/client';
 import { createMutations } from './mutations/create.js';
+import { changeMutations } from './mutations/change.js';
+import { deleteMutations } from './mutations/delete.js';
+import { subscribeMutation } from './mutations/subscribe.js';
 
 const plugin: FastifyPluginAsyncTypebox = async (fastify) => {
   const { prisma } = fastify;
@@ -36,7 +25,10 @@ const plugin: FastifyPluginAsyncTypebox = async (fastify) => {
     profile,
   } = fieldQueries;
 
-  const { createPost, createProfile, createUser } = createMutations
+  const { createPost, createProfile, createUser } = createMutations;
+  const { changePost, changeProfile, changeUser } = changeMutations;
+  const { deletePost, deleteProfile, deleteUser } = deleteMutations;
+  const { subscribeTo, unsubscribeFrom } = subscribeMutation;
 
   const schema = new GraphQLSchema({
     query: new GraphQLObjectType({
@@ -58,6 +50,14 @@ const plugin: FastifyPluginAsyncTypebox = async (fastify) => {
             createPost,
             createUser,
             createProfile,
+            changePost,
+            changeProfile,
+            changeUser,
+            deletePost,
+            deleteProfile,
+            deleteUser,
+            subscribeTo,
+            unsubscribeFrom,
         }
     })
   });

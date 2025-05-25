@@ -25,7 +25,7 @@ export const createMutations = {
             return prisma.post.create({
                 data: dto
             });
-        }
+        },
     },
     createUser: {
         type: new GraphQLNonNull(userType),
@@ -44,7 +44,7 @@ export const createMutations = {
             return prisma.user.create({
                 data: dto
             });
-        }
+        },
     },
     createProfile: {
         type: new GraphQLNonNull(profileType),
@@ -65,6 +65,6 @@ export const createMutations = {
             return prisma.profile.create({
                 data: dto
             });
-        }
-    }
-}
+        },
+    },
+};
