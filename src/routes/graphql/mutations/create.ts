@@ -21,7 +21,11 @@ export const createMutations = {
                 }))
             }
         },
-        resolve: async (_, { dto }: { dto: { title: string; content: string; authorId: string } }, { prisma }: { prisma: PrismaClient }) => {
+        resolve: async (
+            _,
+            { dto }: { dto: { title: string; content: string; authorId: string } },
+            { prisma }: { prisma: PrismaClient },
+        ) => {
             return prisma.post.create({
                 data: dto
             });
@@ -40,7 +44,11 @@ export const createMutations = {
                 }))
             }
         },
-        resolve: async (_, { dto }: { dto: { name: string; balance: number } }, { prisma }: { prisma: PrismaClient }) => {
+        resolve: async (
+            _,
+            { dto }: { dto: { name: string; balance: number } },
+            { prisma }: { prisma: PrismaClient },
+        ) => {
             return prisma.user.create({
                 data: dto
             });
@@ -61,7 +69,11 @@ export const createMutations = {
                 }))
             }
         },
-        resolve: async (_, { dto }: { dto: { isMale: boolean; yearOfBirth: number; memberTypeId: string; userId: string } }, { prisma }: { prisma: PrismaClient }) => {
+        resolve: async (
+            _,
+            { dto }: { dto: { isMale: boolean; yearOfBirth: number; memberTypeId: string; userId: string } },
+            { prisma }: { prisma: PrismaClient },
+        ) => {
             return prisma.profile.create({
                 data: dto
             });

@@ -15,6 +15,7 @@ import { changeMutations } from './mutations/change.js';
 import { deleteMutations } from './mutations/delete.js';
 import { subscribeMutation } from './mutations/subscribe.js';
 import depthLimit from 'graphql-depth-limit';
+import { setLoaders } from './loaders.js';
 
 const plugin: FastifyPluginAsyncTypebox = async (fastify) => {
   const { prisma } = fastify;
@@ -89,7 +90,8 @@ const plugin: FastifyPluginAsyncTypebox = async (fastify) => {
         source: req.body.query,
         variableValues: req.body.variables,
         contextValue: {
-            prisma
+            prisma,
+            loaders: setLoaders(prisma)
         },
       });
     },
